@@ -3,26 +3,25 @@ CREATE DATABASE employees_db;
 
 USE employees_db;
 
-CREATE TABLE department(
+CREATE TABLE department (
     id INT AUTO_INCREMENT NOT NULL,
     department_name VARCHAR(30) NOT NULL,
-    PRIMARY KEY(id)
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE role(
-    id  INT AUTO_INCREMENT NOT NULL,
+CREATE TABLE position (
+    id INT AUTO_INCREMENT NOT NULL,
     title VARCHAR(30) NOT NULL,
     salary DECIMAL(10, 0) NOT NULL,
     department_id INT,
-    PRIMARY KEY(id)
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE empoyee(
+CREATE TABLE employees (
     id INT AUTO_INCREMENT NOT NULL,
-    first_name  VARCHAR(30)
-    last_name  VARCHAR(30)
-    role_id INT,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    position_id INT,
     manager_id INT,
-    PRIMARY KEY(id)
-
+    PRIMARY KEY (id)
 );
