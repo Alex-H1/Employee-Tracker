@@ -1,8 +1,19 @@
+-- INSERT INTO department (department_name)
+-- VALUES ("Sales"),
+--         ("Engineering"),
+--         ("Finance"),
+--         ("Legal");
+
 INSERT INTO department (department_name)
-VALUES ("Sales"),
-        ("Engineering"),
-        ("Finance"),
-        ("Legal");
+VALUES ('Management');
+INSERT INTO department (department_name)
+VALUES ('Sales');
+INSERT INTO department (department_name)
+VALUES ('Accounting');
+INSERT INTO department (department_name)
+VALUES ('Reception');
+INSERT INTO department (department_name)
+VALUES ('Human Resources');
 
 
 INSERT INTO position (title, salary, department_id)

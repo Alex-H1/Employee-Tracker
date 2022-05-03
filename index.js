@@ -151,10 +151,52 @@ const addDep = async()=>{
             message: 'What is the name of the new department?'
         }
     ]);
-    db.query('INSERT INTO department SET ?',{
+    db.query('INSERT INTO department ?',{
         department_name: dep.newDep
     });
     console.log(`succesfully added ${dep.depName}`);
     askQuestion();
-}
+};
+
+const addRole = async()=>{
+    // let departments =  db.query('SELECT * FROM department')
+    let role = await inquirer.prompt([
+        {
+            name: 'roleName',
+            message: 'what is the name of the role?',
+        },
+        {
+            name: 'salary',
+            message: 'what is the salary of the role?'
+        },
+        {
+            type: 'list',
+            name: 'department',
+            message: 'Which department does this role belong to?',
+            choices: ['Sales', 'Engineering','Finance','Legal']
+        }
+    ]);
+    console.log(role.department)
+    
+    db.query('INSERT INTO position ?',{
+        title: role.roleName,
+        salary: role.salary
+    });
+        console.log(`succesfully added ${role.roleName}`);
+
+    
+    // let choosedept;
+    // for(var i = 0; i < departments.length ; i++){
+    //     if(departments[i].department_id === role.choice){
+    //         chosedept = departments[i];
+    //     };
+    // };
+    // let result = await db.query('INSERT INTO position SET ?',{
+    //     title: role.roleName,
+    //     salary: role.salary,
+    //     department_id: role.department
+    // })
+    // console.log(`succesfully added ${role.roleName}`);
+    askQuestion();
+};
 
