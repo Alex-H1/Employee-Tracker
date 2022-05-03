@@ -159,7 +159,6 @@ const addDep = async()=>{
 };
 
 const addRole = async()=>{
-    // let departments =  db.query('SELECT * FROM department')
     let role = await inquirer.prompt([
         {
             name: 'roleName',
@@ -175,9 +174,7 @@ const addRole = async()=>{
             message: 'Which department does this role belong to?',
             choices: ['Sales', 'Engineering','Finance','Legal']
         }
-    ]);
-    console.log(role.department)
-    
+    ]);    
     db.query('INSERT INTO position ?',{
         title: role.roleName,
         salary: role.salary
@@ -200,3 +197,78 @@ const addRole = async()=>{
     askQuestion();
 };
 
+const addEmp = async() =>{
+    let newEmp = await inquirer.prompt([
+        {
+            name: 'employeeName',
+            message: 'What is the employee\'s name?'
+        },
+        {
+            name: 'lastName',
+            message: 'What is the employees last name?'
+        },
+        {
+            type: 'list',
+            name: 'empRole',
+            message: 'what is the employee\'s role?',
+            choices: ['Sales Lead',
+            'Salesperson',
+            'Lead Engineer',
+            'Software Engineer',
+            'Account Manager',
+            'Accountant',
+            'Legal Team Lead'
+            ,'Lawyer']
+        },
+        {
+            type: 'list',
+            name: 'empMan',
+            message: 'Who is the employee\'s manager?',
+            choices: ['John Doe',
+            'Mike Chan',
+            'Ashley Rodriguez',
+            'Kevin Tupic',
+            'Kunal Singh',
+            'Malia Brown']
+        }    
+    ])
+    db.query('INSERT INTO employees SET ?',{
+        first_name: newEmp.employeeName,
+        last_name: newEmp.lastName,
+    })
+    console.log(`succesfully added ${newEmp.employeeName} ${newEmp.lastName}`)
+    askQuestion();
+}
+
+const updateEmp = async() =>{
+    let updateEmployee = await inquirer.prompt([
+        {
+            name: 'selectEmp',
+            type: 'list',
+            message:'Wich employee would you like to update?',
+            choices:['John Doe',
+            'Mike Chan',
+            'Ashley Rodriguez',
+            'Mike Chan',
+            'Kevin Tupic',
+            'Kunal Sing','Malia Brown','Sarah Lourd',
+            'Tom Allen']
+        },
+        {
+            name: 'selectRole',
+            type: 'list',
+            message: 'Wich role do you want to assign the selected employee?',
+            choices: ['Sales Lead',
+            'Salesperson',
+            'Lead Engineer',
+            'Software Engineer',
+            'Account Manager',
+            'Accountant',
+            'Legal Team Lead'
+            ,'Lawyer']
+        }
+    ]);
+    db.query('UPDATE employee SET ? WHERE ?',[{role_id: updateEmployee.selectRole},{id: updateEmployee.selectEmp}]);
+    console.log('succesfuly changed role');
+    askQuestion();
+};
