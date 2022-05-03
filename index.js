@@ -182,18 +182,7 @@ const addRole = async()=>{
         console.log(`succesfully added ${role.roleName}`);
 
     
-    // let choosedept;
-    // for(var i = 0; i < departments.length ; i++){
-    //     if(departments[i].department_id === role.choice){
-    //         chosedept = departments[i];
-    //     };
-    // };
-    // let result = await db.query('INSERT INTO position SET ?',{
-    //     title: role.roleName,
-    //     salary: role.salary,
-    //     department_id: role.department
-    // })
-    // console.log(`succesfully added ${role.roleName}`);
+
     askQuestion();
 };
 
