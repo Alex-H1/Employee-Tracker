@@ -69,33 +69,32 @@ const askQuestion = async()=>{
             'View All Departments', 
             'Add Department', 
             'Add Role', 
-            'View Employee', 
-            'Update Role', 
+            'Add Employee', 
+            'Update Employee Role', 
             'Quit'
         ]
     });
 switch(answer.choices){
     case 'View All Roles':
-                    
+         viewRole();
         break;
     case 'View All Employees':
         viewEmp();
-        askQuestion();
         break;
     case 'View All Departments':
-
+        viewDep();
         break;
     case 'Add Department':
-
+        addDep();
         break;
     case 'Add Role':
-                
+        addRole();
         break;
-    case 'View Employee':
-
+    case 'Add Employee':
+        addEmp();
         break;
-    case 'Update Role':
-
+    case 'Update Employee Role':
+        updateEmp();
         break;
     case 'Quit':
         db.end();
@@ -109,12 +108,53 @@ const viewEmp = async() =>{
     let query = 'SELECT * FROM employees';
     db.query(query, function(err, res){
         if(err){
-            console.log(err)
-        }
+            console.error(err);
+        };
         let showEmp = [];
         res.forEach(employees => showEmp.push(employees));
         console.table(showEmp);
-    })
-}
+        askQuestion();
+    });
+};
 
+const viewDep = async() =>{
+
+    let query = 'SELECT * FROM department';
+    db.query(query, function(err, res){
+        if(err){
+            console.error(err);
+        };
+        let showDep = [];
+        res.forEach(department => showDep.push(department));
+        console.table(showDep);
+        askQuestion();
+    });
+};
+
+const viewRole = async() =>{
+    let query = 'SELECT * FROM position';
+    db.query(query, function(err, res){
+        if(err){
+            console.error(err);
+        };
+        let showRole = [];
+        res.forEach(position => showRole.push(position));
+        console.table(showRole);
+        askQuestion();
+    });
+};
+
+const addDep = async()=>{
+    let dep = await inquirer.prompt([
+        {
+            name: 'depName',
+            message: 'What is the name of the new department?'
+        }
+    ]);
+    db.query('INSERT INTO department SET ?',{
+        department_name: dep.newDep
+    });
+    console.log(`succesfully added ${dep.depName}`);
+    askQuestion();
+}
 
